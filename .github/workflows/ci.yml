@@ -33,5 +33,5 @@ jobs:
           [[ ${{ steps.split.outputs._0 }} == "0" ]] || (echo "test fail"; exit 1)
           [[ ${{ steps.split.outputs._50 }} == "50" ]] || (echo "test fail"; exit 1)
           [[ ${{ steps.split.outputs._98 }} == "98" ]] || (echo "test fail"; exit 1)
-          [[ ${{ steps.split.outputs._99 }} == "99" ]] || (echo "test fail"; exit 1)
+          [[ ${{ steps.split.outputs._99 }} == "99 100" ]] || (echo "test fail"; exit 1)
           [[ ${{ steps.split.outputs.length }} == "100" ]] || (echo "test fail"; exit 1)
