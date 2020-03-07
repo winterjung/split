@@ -1,0 +1,20 @@
+name: ci
+on:
+  - push
+jobs:
+  action-test:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run split action
+        id: split
+        uses: ./
+        with:
+          msg: '/release split v1'
+      - name: Test results
+        run: |
+          [[ ${{ steps.split.outputs.0 }} == "/release" ]] || (echo "test fail"; exit 1)
+          [[ ${{ steps.split.outputs.1 }} == "split" ]] || (echo "test fail"; exit 1)
+          [[ ${{ steps.split.outputs.2 }} == "v1" ]] || (echo "test fail"; exit 1)
+          [[ ${{ steps.split.outputs.length }} == "3" ]] || (echo "test fail"; exit 1)
