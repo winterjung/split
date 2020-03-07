@@ -12,6 +12,7 @@
 
 - `_0`, `_1`, ..., `_n`: Each result of a splits
   - According to [metadata syntax of outputs], it has `_` prefix
+  - Currently, support only `100` splits
 - `length`: Length of the splits
 
 ## Example
