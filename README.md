@@ -1,5 +1,7 @@
 # Split
 
+[![Actions Status](https://github.com/jungwinter/split/workflows/ci/badge.svg)](https://github.com/jungwinter/split/actions)
+
 > ✂️ GitHub action to split string
 
 ## Inputs
