@@ -15,6 +15,15 @@ inputs:
     required: false
     default: '-1'
     description: Maximum number of splits
+outputs:
+  length:
+    description: Length of the splits
+  0:
+    description: [0]
+  1:
+    description: [1]
+  2:
+    description: [2]
 runs:
   using: docker
   image: Dockerfile
