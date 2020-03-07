@@ -10,7 +10,8 @@
 
 ## Outputs
 
-- `0`, `1`, ..., `n`: Each result of a splits
+- `_0`, `_1`, ..., `_n`: Each result of a splits
+  - According to [metadata syntax of outputs], it has `_` prefix
 - `length`: Length of the splits
 
 ## Example
@@ -40,3 +41,4 @@ jobs:
 
 
 [MIT license]: LICENSE
+[metadata syntax of outputs]: https://help.github.com/en/actions/building-actions/metadata-syntax-for-github-actions#outputsoutput_id

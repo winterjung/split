@@ -18,12 +18,12 @@ inputs:
 outputs:
   length:
     description: Length of the splits
-  0:
-    description: [0]
-  1:
-    description: [1]
-  2:
-    description: [2]
+  _0:
+    description: 1st element
+  _1:
+    description: 2nd element
+  _2:
+    description: 3rd element
 runs:
   using: docker
   image: Dockerfile

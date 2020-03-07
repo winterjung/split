@@ -30,7 +30,7 @@ def main():
     results = msg.split(sep=seperator, maxsplit=maxsplit)
 
     for i, result in enumerate(results):
-        set_action_output(str(i), result)
+        set_action_output('_' + str(i), result)
     set_action_output('length', len(results))
 
 
