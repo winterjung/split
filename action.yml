@@ -1,0 +1,33 @@
+name: Split
+description: Set outputs
+branding:
+  icon: scissors
+  color: blue
+inputs:
+  msg:
+    required: true
+    description: String to split
+  seperator:
+    required: false
+    default: ' '
+    description: The delimiter to split the string
+  maxsplit:
+    required: false
+    default: '-1'
+    description: Maximum number of splits
+outputs:
+  length:
+    description: Length of the splits
+  _0:
+    description: 1st element
+  _1:
+    description: 2nd element
+  _2:
+    description: 3rd element
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.msg }}
+    - ${{ inputs.seperator }}
+    - ${{ inputs.maxsplit }}
