@@ -1,5 +1,5 @@
 import os
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 
 DEFINED_ACTION_OUTPUTS_NUMBER = 100
@@ -25,13 +25,16 @@ def get_action_input(
     return v
 
 
-def split(msg: str, sep: str, maxsplit: int) -> Dict[str, str]:
+def split(msg: str, sep: str, maxsplit: int) -> List[str]:
     results = msg.split(sep=sep, maxsplit=maxsplit)
     if len(results) > DEFINED_ACTION_OUTPUTS_NUMBER:
         results = msg.split(
             sep=sep, maxsplit=DEFINED_ACTION_OUTPUTS_NUMBER - 1
         )
+    return results
 
+
+def to_outputs(results: List[str]) -> Dict[str, str]:
     outputs = {
         'length': str(len(results)),
     }
@@ -45,7 +48,8 @@ def main():
     seperator = get_action_input('seperator', required=False, default=' ')
     maxsplit = int(get_action_input('maxsplit', required=False, default='-1'))
 
-    outputs = split(msg, seperator, maxsplit)
+    results = split(msg, seperator, maxsplit)
+    outputs = to_outputs(results)
     for k, v in outputs.items():
         set_action_output(k, v)
 
