@@ -25,7 +25,7 @@ def get_action_input(
     return v
 
 
-def split(msg: str, sep: str, maxsplit: int) -> List[str]:
+def split(msg: str, sep: str = ' ', maxsplit: int = -1) -> List[str]:
     results = msg.split(sep=sep, maxsplit=maxsplit)
     if len(results) > DEFINED_ACTION_OUTPUTS_NUMBER:
         results = msg.split(
