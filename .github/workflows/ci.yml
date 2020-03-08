@@ -2,36 +2,37 @@ name: ci
 on:
   - push
 jobs:
-  test:
+  unit:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+          architecture: x64
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Test
+        run: |
+          pip install -r requirements-dev.txt
+          pytest
+
+  integration:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Run split action
         id: split
         uses: ./
         with:
           msg: '/release split v1'
+
       - name: Test results
         run: |
-          [[ "${{ steps.split.outputs._0 }}" == "/release" ]] || (echo "test fail"; exit 1)
-          [[ "${{ steps.split.outputs._1 }}" == "split" ]] || (echo "test fail"; exit 1)
-          [[ "${{ steps.split.outputs._2 }}" == "v1" ]] || (echo "test fail"; exit 1)
-          [[ "${{ steps.split.outputs.length }}" == "3" ]] || (echo "test fail"; exit 1)
-  test-100:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Run split action
-        id: split
-        uses: ./
-        with:
-          msg: '0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100'
-      - name: Test results
-        run: |
-          [[ "${{ steps.split.outputs._0 }}" == "0" ]] || (echo "test fail"; exit 1)
-          [[ "${{ steps.split.outputs._50 }}" == "50" ]] || (echo "test fail"; exit 1)
-          [[ "${{ steps.split.outputs._98 }}" == "98" ]] || (echo "test fail"; exit 1)
-          [[ "${{ steps.split.outputs._99 }}" == "99 100" ]] || (echo "test fail"; exit 1)
-          [[ "${{ steps.split.outputs.length }}" == "100" ]] || (echo "test fail"; exit 1)
+          [[ "${{ steps.split.outputs._0 }}" == "/release" ]] || exit 1
+          [[ "${{ steps.split.outputs._1 }}" == "split" ]] || exit 1
+          [[ "${{ steps.split.outputs._2 }}" == "v1" ]] || exit 1
+          [[ "${{ steps.split.outputs.length }}" == "3" ]] || exit 1
