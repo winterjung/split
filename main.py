@@ -1,5 +1,5 @@
 import os
-from typing import Optional
+from typing import Dict, List, Optional
 
 
 DEFINED_ACTION_OUTPUTS_NUMBER = 100
@@ -25,18 +25,33 @@ def get_action_input(
     return v
 
 
+def split(msg: str, sep: str = ' ', maxsplit: int = -1) -> List[str]:
+    results = msg.split(sep=sep, maxsplit=maxsplit)
+    if len(results) > DEFINED_ACTION_OUTPUTS_NUMBER:
+        results = msg.split(
+            sep=sep, maxsplit=DEFINED_ACTION_OUTPUTS_NUMBER - 1
+        )
+    return results
+
+
+def to_outputs(results: List[str]) -> Dict[str, str]:
+    outputs = {
+        'length': str(len(results)),
+    }
+    for i, result in enumerate(results):
+        outputs[f'_{i}'] = result
+    return outputs
+
+
 def main():
     msg = get_action_input('msg', required=True)
     seperator = get_action_input('seperator', required=False, default=' ')
     maxsplit = int(get_action_input('maxsplit', required=False, default='-1'))
 
-    results = msg.split(sep=seperator, maxsplit=maxsplit)
-    if len(results) > DEFINED_ACTION_OUTPUTS_NUMBER:
-        results = msg.split(sep=seperator, maxsplit=DEFINED_ACTION_OUTPUTS_NUMBER - 1)
-
-    for i, result in enumerate(results):
-        set_action_output('_' + str(i), result)
-    set_action_output('length', len(results))
+    results = split(msg, seperator, maxsplit)
+    outputs = to_outputs(results)
+    for k, v in outputs.items():
+        set_action_output(k, v)
 
 
 if __name__ == '__main__':
