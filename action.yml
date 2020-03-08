@@ -1,5 +1,5 @@
-name: Split
-description: Set outputs
+name: Split Action
+description: Listify input and set outputs with index
 branding:
   icon: scissors
   color: blue
