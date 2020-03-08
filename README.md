@@ -31,11 +31,11 @@ jobs:
           msg: '/release split v1.0.0'
 
       - name: release package
-        if: steps.split.outputs.0 == '/release'
+        if: steps.split.outputs._0 == '/release'
         uses: actions/create-release@latest
         with:
-          release_name: Release ${{ steps.split.outputs.1 }}
-          tag_name: ${{ steps.split.outputs.2 }}
+          release_name: Release ${{ steps.split.outputs._1 }}
+          tag_name: ${{ steps.split.outputs._2 }}
 ```
 
 ---
