@@ -17,10 +17,10 @@ class TestSplit:
             (' /release split v1 ', ' ', ['', '/release', 'split', 'v1', '']),
         ],
     )
-    def test_seperator(self, msg, sep, expected):
+    def test_separator(self, msg, sep, expected):
         assert split(msg, sep=sep) == expected
 
-    def test_empty_seperator(self):
+    def test_empty_separator(self):
         with pytest.raises(ValueError):
             split('must fail', sep='')
 

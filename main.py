@@ -45,10 +45,10 @@ def to_outputs(results: List[str]) -> Dict[str, str]:
 
 def main():
     msg = get_action_input('msg', required=True)
-    seperator = get_action_input('seperator', required=False, default=' ')
+    separator = get_action_input('separator', required=False, default=' ')
     maxsplit = int(get_action_input('maxsplit', required=False, default='-1'))
 
-    results = split(msg, seperator, maxsplit)
+    results = split(msg, separator, maxsplit)
     outputs = to_outputs(results)
     for k, v in outputs.items():
         set_action_output(k, v)

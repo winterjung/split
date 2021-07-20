@@ -7,7 +7,7 @@ inputs:
   msg:
     required: true
     description: String to split
-  seperator:
+  separator:
     required: false
     default: ' '
     description: The delimiter to split the string
@@ -223,5 +223,5 @@ runs:
   image: docker://winterjung/split:v1
   args:
     - ${{ inputs.msg }}
-    - ${{ inputs.seperator }}
+    - ${{ inputs.separator }}
     - ${{ inputs.maxsplit }}
