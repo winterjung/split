@@ -7,7 +7,7 @@
 ## Inputs
 
 - `msg`: String to split
-- `seperator`: The delimiter to split the string. Default: `' '` (whitespace)
+- `separator`: The delimiter to split the string. Default: `' '` (whitespace)
 - `maxsplit`: Maximum number of splits. Default: `-1` (no limit)
 
 ## Outputs
