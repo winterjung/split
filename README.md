@@ -25,7 +25,7 @@ jobs:
   example:
     runs-on: ubuntu-latest
     steps:
-      - uses: jungwinter/split@v1
+      - uses: jungwinter/split@v2
         id: split
         with:
           msg: '/release split v1.0.0'
