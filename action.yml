@@ -221,6 +221,7 @@ outputs:
 runs:
   using: docker
   image: docker://python:3.9.7-alpine3.14
+  entrypoint: entrypoint.sh
   args:
     - ${{ inputs.msg }}
     - ${{ inputs.separator }}
