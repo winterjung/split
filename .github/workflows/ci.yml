@@ -42,3 +42,21 @@ jobs:
           [[ "${{ steps.split.outputs._1 }}" == "split" ]] || exit 1
           [[ "${{ steps.split.outputs._2 }}" == "v1" ]] || exit 1
           [[ "${{ steps.split.outputs.length }}" == "3" ]] || exit 1
+
+  actions-test:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: jungwinter/split@v2.0.1
+        id: split
+        with:
+          msg: jungwinter/split
+          separator: '/'
+
+      - name: Test results
+        run: |
+          [[ "${{ steps.split.outputs._0 }}" == "jungwinter" ]] || exit 1
+          [[ "${{ steps.split.outputs._1 }}" == "split" ]] || exit 1
+          [[ "${{ steps.split.outputs.length }}" == "2" ]] || exit 1
