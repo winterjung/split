@@ -29,16 +29,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Run split action
-        id: split
-        run: |
-          python3 main.py
-        env:
-          INPUT_MSG: '/release split v1'
+      - name: Test local version
+        id: local
+        uses: ./
+        with:
+          msg: 'repo/name'
+          separator: '/'
+
+      - name: Test v2 version
+        id: v2
+        uses: jungwinter/split@v2
+        with:
+          msg: 'repo/name'
+          separator: '/'
+
+      - name: Test v1 version
+        id: v1
+        uses: jungwinter/split@v1
+        with:
+          msg: 'repo/name'
+          # v1 has misspelled sep'e'rator
+          seperator: '/'
 
       - name: Test results
         run: |
-          [[ "${{ steps.split.outputs._0 }}" == "/release" ]] || exit 1
-          [[ "${{ steps.split.outputs._1 }}" == "split" ]] || exit 1
-          [[ "${{ steps.split.outputs._2 }}" == "v1" ]] || exit 1
-          [[ "${{ steps.split.outputs.length }}" == "3" ]] || exit 1
+          [[ "${{ steps.local.outputs._0 }}" == "repo" ]] || exit 1
+          [[ "${{ steps.local.outputs._1 }}" == "name" ]] || exit 1
+          [[ "${{ steps.local.outputs.length }}" == "2" ]] || exit 1
+          [[ "${{ steps.v2.outputs._0 }}" == "repo" ]] || exit 1
+          [[ "${{ steps.v2.outputs._1 }}" == "name" ]] || exit 1
+          [[ "${{ steps.v2.outputs.length }}" == "2" ]] || exit 1
+          [[ "${{ steps.v1.outputs._0 }}" == "repo" ]] || exit 1
+          [[ "${{ steps.v1.outputs._1 }}" == "name" ]] || exit 1
+          [[ "${{ steps.v1.outputs.length }}" == "2" ]] || exit 1
