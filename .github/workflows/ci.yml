@@ -31,7 +31,7 @@ jobs:
 
       - name: Test local version
         id: local
-        uses: .
+        uses: ./
         with:
           msg: 'repo/name'
           separator: '/'
