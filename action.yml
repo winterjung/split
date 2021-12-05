@@ -220,8 +220,7 @@ outputs:
     description: 100th element
 runs:
   using: docker
-  image: docker://python:3.9.7-alpine3.14
-  entrypoint: ./entrypoint.sh
+  image: docker://winterjung/split:v2
   args:
     - ${{ inputs.msg }}
     - ${{ inputs.separator }}
