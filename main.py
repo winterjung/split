@@ -6,7 +6,12 @@ DEFINED_ACTION_OUTPUTS_NUMBER = 100
 
 
 def set_action_output(name: str, value: str):
-    with open("$GITHUB_OUTPUT", "a") as github_output_file:
+    # See https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+    path = os.getenv('GITHUB_OUTPUT')
+    if not path:
+        print_action_error('$GITHUB_OUTPUT env is required.')
+        exit(1)
+    with open(path, 'a') as github_output_file:
         github_output_file.write(f'{name}={value}\n')
 
 
