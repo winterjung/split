@@ -1,0 +1,21 @@
+on:
+  push:
+    tags:
+      - v*
+
+name: release
+
+jobs:
+  docker:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build and push
+        uses: docker/build-push-action@v1
+        with:
+          username: winterjung
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: winterjung/split
+          tag_with_ref: true
