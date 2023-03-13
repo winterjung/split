@@ -19,6 +19,10 @@ def print_action_error(msg: str):
     print(f'::error file={__name__}::{msg}')
 
 
+def print_action_debug(msg: str):
+    print(f'::debug::{msg}')
+
+
 def get_action_input(
     name: str, required: bool = False, default: Optional[str] = None
 ) -> str:
@@ -51,12 +55,18 @@ def to_outputs(results: List[str]) -> Dict[str, str]:
 
 def main():
     msg = get_action_input('msg', required=True)
+    print_action_debug(f'msg: {msg}')
     separator = get_action_input('separator', required=False, default=' ')
+    print_action_debug(f'separator: {separator}')
     maxsplit = int(get_action_input('maxsplit', required=False, default='-1'))
+    print_action_debug(f'maxsplit: {maxsplit}')
 
     results = split(msg, separator, maxsplit)
+    print_action_debug(f'results: {results}')
     outputs = to_outputs(results)
+    print_action_debug(f'outputs: {outputs}')
     for k, v in outputs.items():
+        print_action_debug(f'k: {k}, v: {v}')
         set_action_output(k, v)
 
 
