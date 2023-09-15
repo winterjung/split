@@ -1,6 +1,6 @@
 # Split
 
-[![Actions Status](https://github.com/jungwinter/split/workflows/ci/badge.svg)](https://github.com/jungwinter/split/actions)
+[![Actions Status](https://github.com/winterjung/split/actions/workflows/ci.yml/badge.svg)](https://github.com/winterjung/split/actions/workflows/ci.yml)
 
 > ✂️ GitHub action to split string
 
@@ -25,7 +25,7 @@ jobs:
   example:
     runs-on: ubuntu-latest
     steps:
-      - uses: jungwinter/split@v2
+      - uses: winterjung/split@v2
         id: split
         with:
           msg: '/release split v1.0.0'
